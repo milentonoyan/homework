@@ -1,0 +1,74 @@
+#include <iostream>
+const int size = 30; 
+void inputGrades(int grades[], int size);
+void displayGrades(const int grades[], int size);
+double calculateAverage(const int grades[], int size);
+int findHighestGrade(const int grades[], int size);
+int findLowestGrade(const int grades[], int size);
+void sortGrades(int grades[], int size);
+int main() {
+    int grades[size];  
+    inputGrades(grades, size);    
+    std::cout << "Grades: ";
+    displayGrades(grades, size);
+    std::cout << "Average grade: " << calculateAverage(grades, size) << std::endl;
+    std::cout << "Highest grade: " << findHighestGrade(grades, size) << std::endl;
+    std::cout<< "Lowest grade: " << findLowestGrade(grades, size) << std::endl;
+    sortGrades(grades, size);
+    std::cout << "Sorted grades: ";
+    displayGrades(grades, size);
+    return 0;
+}
+
+void inputGrades(int grades[], int size) {
+    for (int i = 0; i < size; i++) {
+        std::cin >> grades[i];
+    }
+}
+
+void displayGrades(const int grades[], int size) {
+    for (int i = 0; i < size; i++) {
+        std::cout << grades[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+double calculateAverage(const int grades[], int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += grades[i];
+    }
+    return sum / size;
+}
+
+int findHighestGrade(const int grades[], int size) {
+    int max = grades[0];
+    for (int i = 1; i < size; i++) {
+        if (grades[i] > max) {
+            max = grades[i];
+        }
+    }
+    return max;
+}
+
+int findLowestGrade(const int grades[], int size) {
+    int min = grades[0];
+    for (int i = 1; i < size; i++) {
+        if (grades[i] < min) {
+            min = grades[i];
+        }
+    }
+    return min;
+}
+
+void sortGrades(int grades[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (grades[i] > grades[j]) {
+                int a = grades[i];
+                grades[i] = grades[j];
+                grades[j] = a;
+            }
+        }
+    }
+}
