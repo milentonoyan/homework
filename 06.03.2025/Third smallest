@@ -1,0 +1,31 @@
+#include <iostream>
+void inputGrades(int grades[], int size) {
+    for (int i = 0; i < size; i++) {
+        std::cin >> grades[i];
+    }
+}
+int thirdSmallest(int grades[], int size) {
+    int a = 100000, b = 100000, c = 100000;
+    for (int i = 0; i < size; i++) {
+        if (grades[i] < a) {
+            c = b;
+            b = a;
+            a = grades[i];
+        } else if (grades[i] < b && grades[i] != a) {
+            c = b;
+            b = grades[i];
+        } else if (grades[i] < c && grades[i] != b && grades[i] != a) {
+            c = grades[i];
+        }
+    }
+    return c;
+}
+int main() {
+    const int size = 5;
+    int grades[size];
+    std::cout << "";
+    inputGrades(grades, size);
+    int num  = thirdSmallest(grades, size);
+    std::cout << "Third smallest number: " << num << std::endl;
+    return 0;
+}
