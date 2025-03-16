@@ -1,0 +1,73 @@
+#include <iostream>
+void matrix(const char arr[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            std::cout << arr[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+void matrix1(char arr[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            arr[i][j] = '.';
+        }
+    }
+}
+bool winner(char arr[3][3], char symbol) {
+    for (int i = 0; i < 3; i++) {
+        if (arr[i][0] == symbol && arr[i][1] == symbol && arr[i][2] == symbol) return true;
+        if (arr[0][i] == symbol && arr[1][i] == symbol && arr[2][i] == symbol) return true;
+    }
+    if (arr[0][0] == symbol && arr[1][1] == symbol && arr[2][2] == symbol) return true;
+    if (arr[0][2] == symbol && arr[1][1] == symbol && arr[2][0] == symbol) return true;
+    return false;
+}
+bool full(char arr[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (arr[i][j] == '.') return false;
+        }
+    }
+    return true;
+}
+void xANDo(char arr[3][3]) {
+    int count = 1;
+    bool game = true;
+    int a, b;
+    char symbol1;
+    while (game) {
+        switch (count % 2) {
+            case 1:
+                std::cout << "Enter the X: ";
+                symbol1 = 'x';
+                break;
+            case 0:
+                std::cout <<" Enter the O: ";
+                symbol1 = 'o';
+                break;
+        }
+        std::cin >> a >> b;
+        if (a < 0  a > 2  b < 0  b > 2  arr[a][b] != '.') {
+            std::cout << "Error, try again"<<std::endl;
+            continue;
+        }
+        arr[a][b] = symbol1;
+        matrix(arr);
+        if (winner(arr, symbol1)) {
+            std::cout << symbol1 << " win\n";
+            break;
+        }
+        if (full(arr)) {
+            std::cout << "No one!\n";
+            break;
+        }
+        count++;
+    }
+}
+int main() {
+    char arr[3][3];
+    matrix1(arr);
+    xANDo(arr);
+    return 0;
+}
